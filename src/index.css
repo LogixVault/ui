@@ -66,3 +66,37 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+@keyframes UpandAway  {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+.element {
+  position: fixed;
+  bottom: 0;
+  left: 40vw;
+  transform: translateX(-50%);
+  animation: UpandAway 5s infinite;
+  aspect-ratio: 1/1;
+  width: 40vw;
+  max-width:400px;
+  min-width:250px;
+  height: auto;
+}
+
+body {
+  background: black;
+  height: 100vh;
+  overflow: hidden;
+}
