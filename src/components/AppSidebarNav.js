@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import {  NavLink, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { CBadge } from '@coreui/react'
@@ -34,6 +34,7 @@ export const AppSidebarNav = ({ items }) => {
         {...(rest.to &&
           !rest.items && {
             component: NavLink,
+            
           })}
         key={index}
         {...rest}
@@ -53,6 +54,7 @@ export const AppSidebarNav = ({ items }) => {
         toggler={navLink(name, icon)}
         visible={location.pathname.startsWith(to)}
         {...rest}
+        
       >
         {item.items?.map((item, index) =>
           item.items ? navGroup(item, index) : navItem(item, index, true),
