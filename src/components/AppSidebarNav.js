@@ -1,5 +1,5 @@
 import React from 'react'
-import {  NavLink, useLocation } from 'react-router-dom'
+import {  Link, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { CBadge } from '@coreui/react'
@@ -33,7 +33,7 @@ export const AppSidebarNav = ({ items }) => {
       <Component
         {...(rest.to &&
           !rest.items && {
-            component: NavLink,
+            component: Link,
             
           })}
         key={index}

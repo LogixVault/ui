@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAtom } from "jotai"; // Import useAtom
 import {
   CButton,
   CCol,
@@ -6,12 +7,12 @@ import {
   CForm,
   CFormInput,
   CFormLabel,
-  CModal,
-  CModalBody,
-  CModalHeader,
-  CModalTitle,
+
   CRow,
 } from "@coreui/react";
+
+// Import the rowDataAtom
+import { rowDataAtom } from "../../Context"; // Replace with the actual path
 
 const AddNewOrder = () => {
   const [formData, setFormData] = useState({
@@ -24,11 +25,9 @@ const AddNewOrder = () => {
     status: "",
   });
 
-  const [modal, setModal] = useState(false);
-  const [orderDetails, setOrderDetails] = useState({
-    orderId: "",
-    orderValue: "",
-  });
+
+  // Use the rowDataAtom with useAtom
+  const [rowData, setRowData] = useAtom(rowDataAtom);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,21 +37,26 @@ const AddNewOrder = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simulate order creation logic (fake API call)
-    setTimeout(() => {
-      // Simulate order creation success
-      const orderId = "12345"; // Replace with the actual order ID
-      const orderValue = "$100.00"; // Replace with the actual order value
-      setOrderDetails({ orderId, orderValue });
-      setModal(true);
-    }, 1000); // Simulating a delay of 1 second for the API call
+    // Create a new order object
+    const newOrder = {
+      orderId: rowData.length + 1, // Use a unique ID (you may need a better approach)
+      date: formData.date,
+      customerName: formData.customerName,
+      itemsCount: parseInt(formData.itemCount, 10), // Assuming itemsCount is a number
+      paymentMode: formData.paymentMode,
+      status: formData.status,
+      // Add other properties similarly
+    };
+    const updatedData = [...rowData, newOrder];
+
+    // Save to local storage
+    localStorage.setItem('rowData', JSON.stringify(updatedData));
+  
+    // Update the state
+    setRowData(updatedData);
+    console.log(rowData)
   };
 
-  const closeModal = () => {
-    setModal(false);
-  };
-
-  console.log(orderDetails);
   return (
     <CContainer>
     <h3>Create New Order</h3>
@@ -75,7 +79,7 @@ const AddNewOrder = () => {
       Item Quantity
     </CFormLabel>
     <CFormInput
-      type="text"
+      type="number"
       id="itemQuantity"
       name="itemCount"  // <-- Corrected the name to match the handleChange function
       value={formData.itemCount}
@@ -151,17 +155,6 @@ const AddNewOrder = () => {
         </CButton>
       </CForm>
 
-      {/* Order Creation Status Modal */}
-      <CModal show={modal} onClose={closeModal}>
-        <CModalHeader closeButton>
-          <CModalTitle>Order Creation Status</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <p>Order ID: {orderDetails.orderId}</p>
-          <p>Order Value: {orderDetails.orderValue}</p>
-          {/* Add other order details here */}
-        </CModalBody>
-      </CModal>
     </CContainer>
   );
 };
