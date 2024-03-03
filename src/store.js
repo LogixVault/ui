@@ -1,3 +1,5 @@
+// Theme and sidebar state management using react-redux
+
 import { legacy_createStore as createStore } from 'redux'
 
 const initialState = {
