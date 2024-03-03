@@ -38,8 +38,8 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarHeader className="border-bottom">
-        <CSidebarBrand to="/" className='bg-secondary'>
-        <img src={Logo} className='img-fluid' alt='logo'/>
+        <CSidebarBrand to="/">
+        <h3 className='text-decoration-none'>LogixVault</h3>
         </CSidebarBrand>
         <CCloseButton
           className="d-lg-none"
