@@ -1,11 +1,11 @@
-import React from 'react'
-import {  Link, useLocation } from 'react-router-dom'
-import PropTypes from 'prop-types'
-
-import { CBadge } from '@coreui/react'
+import React from "react";
+import { useLocation,NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { CBadge,CNavItem } from "@coreui/react";
 
 export const AppSidebarNav = ({ items }) => {
-  const location = useLocation()
+  const location = useLocation();
   const navLink = (name, icon, badge, indent = false) => {
     return (
       <>
@@ -23,29 +23,28 @@ export const AppSidebarNav = ({ items }) => {
           </CBadge>
         )}
       </>
-    )
-  }
+    );
+  };
 
   const navItem = (item, index, indent = false) => {
-    const { component, name, badge, icon, ...rest } = item
-    const Component = component
-    return (
-      <Component
-        {...(rest.to &&
-          !rest.items && {
-            component: Link,
-            
-          })}
-        key={index}
-        {...rest}
-      >
-        {navLink(name, icon, badge, indent)}
-      </Component>
-    )
-  }
+    const { component, name, badge, icon, ...rest } = item;
+    const Component = component;
+    console.log(rest);
+    return {
+      ...(rest.to && !rest.items ? (
+        <CNavItem>
+          <NavLink className="nav-link" as={Link} to={rest.to}>{navLink(name, icon, badge, indent)}</NavLink>
+        </CNavItem>
+      ) : (
+        <Component key={index} {...rest}>
+          {navLink(name, icon, badge, indent)}
+        </Component>
+      )),
+    };
+  };
   const navGroup = (item, index) => {
-    const { component, name, icon, items, to, ...rest } = item
-    const Component = component
+    const { component, name, icon, items, to, ...rest } = item;
+    const Component = component;
     return (
       <Component
         compact
@@ -54,23 +53,25 @@ export const AppSidebarNav = ({ items }) => {
         toggler={navLink(name, icon)}
         visible={location.pathname.startsWith(to)}
         {...rest}
-        
       >
         {item.items?.map((item, index) =>
-          item.items ? navGroup(item, index) : navItem(item, index, true),
+          item.items ? navGroup(item, index) : navItem(item, index, true)
         )}
       </Component>
-    )
-  }
+    );
+  };
 
   return (
     <React.Fragment>
       {items &&
-        items.map((item, index) => (item.items ? navGroup(item, index) : navItem(item, index)))}
+        items.map((item, index) => {
+          console.log(item);
+          return item.items ? navGroup(item, index) : navItem(item, index);
+        })}
     </React.Fragment>
-  )
-}
+  );
+};
 
 AppSidebarNav.propTypes = {
   items: PropTypes.arrayOf(PropTypes.any).isRequired,
-}
+};
