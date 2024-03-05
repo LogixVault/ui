@@ -29,7 +29,7 @@ export const AppSidebarNav = ({ items }) => {
   const navItem = (item, index, indent = false) => {
     const { component, name, badge, icon, ...rest } = item;
     const Component = component;
-    console.log(rest);
+   
     return {
       ...(rest.to && !rest.items ? (
         <CNavItem>
@@ -65,7 +65,6 @@ export const AppSidebarNav = ({ items }) => {
     <React.Fragment>
       {items &&
         items.map((item, index) => {
-          console.log(item);
           return item.items ? navGroup(item, index) : navItem(item, index);
         })}
     </React.Fragment>

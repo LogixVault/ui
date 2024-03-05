@@ -2,6 +2,9 @@ import React, { lazy } from 'react';
 
 
 const Login = lazy(() => import('./views/pages/login/Login'));
+const Register = lazy(() => import('./views/pages/register/register'));
+
+
 const AllOrders = lazy(() => import('./views/orders/AllOrders'));
 const AddNewOrder = lazy(() => import('./views/orders/AddNewOrder'));
 const Abandoned = lazy(() => import('./views/orders/Abandoned'));
@@ -46,6 +49,8 @@ const routes = [
   { path: '/analytics/products', name: 'Products', element: Product },
 
   { path: '/login', name: 'Login', element: Login },
+  { path: '/register', name: 'Login', element: Register },
+
 
  
 
