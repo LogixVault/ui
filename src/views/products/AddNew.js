@@ -6,13 +6,10 @@ import {
   CForm,
   CFormInput,
   CFormLabel,
-  CModal,
-  CModalBody,
-  CModalHeader,
-  CModalTitle,
   CRow,
   CFormTextarea,
 } from "@coreui/react";
+import PhotoUploader from "src/components/PhotoUploader";
 
 const AddNewOrder = () => {
   const [formData, setFormData] = useState({
@@ -22,12 +19,6 @@ const AddNewOrder = () => {
     discountedPrice: "",
     description: "",
     images: [],
-  });
-
-  const [modal, setModal] = useState(false);
-  const [orderDetails, setOrderDetails] = useState({
-    orderId: "",
-    orderValue: "",
   });
 
   const handleChange = (e) => {
@@ -40,22 +31,13 @@ const AddNewOrder = () => {
       setFormData((prevData) => ({ ...prevData, [name]: value }));
     }
   };
+  const handleImageSelect = (imageData) => {
+    // Update the formData with the selected image data
+    setFormData((prevData) => ({ ...prevData, images: [imageData] }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Simulate order creation logic (fake API call)
-    setTimeout(() => {
-      // Simulate order creation success
-      const orderId = "12345"; // Replace with the actual order ID
-      const orderValue = "$100.00"; // Replace with the actual order value
-      setOrderDetails({ orderId, orderValue });
-      setModal(true);
-    }, 1000); // Simulating a delay of 1 second for the API call
-  };
-
-  const closeModal = () => {
-    setModal(false);
   };
 
   console.log(formData);
@@ -132,35 +114,18 @@ const AddNewOrder = () => {
           </CCol>
           {/* Add other form fields similarly */}
         </CRow>
-        <CRow>
-          <div className="mb-3">
+        {/* <CRow> */}
+          {/* <div className="mb-3">
             <CFormLabel htmlFor="formFileMultiple">Product Images</CFormLabel>
-            <CFormInput
-              type="file"
-              id="formFileMultiple"
-              multiple
-              name="images"
-              value={formData.images}
-              onChange={handleChange}
-            />
-          </div>
-        </CRow>
+            {/* Integrate the PhotoUploader component */}
+            {/* <PhotoUploader onImageSelect={handleImageSelect} /> */}
+          {/* </div> */} 
+        {/* </CRow> */}
+
         <CButton color="primary" type="submit" className="mt-4 mb-4">
           Add Product
         </CButton>
       </CForm>
-
-      {/* Order Creation Status Modal */}
-      <CModal show={modal} onClose={closeModal}>
-        <CModalHeader closeButton>
-          <CModalTitle>Order Creation Status</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <p>Order ID: {orderDetails.orderId}</p>
-          <p>Order Value: {orderDetails.orderValue}</p>
-          {/* Add other order details here */}
-        </CModalBody>
-      </CModal>
     </CContainer>
   );
 };

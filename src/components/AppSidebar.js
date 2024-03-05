@@ -10,7 +10,6 @@ import {
   CSidebarNav,
   CSidebarToggler,
 } from '@coreui/react'
-import Logo from '../assets/brand/Logo.png'
 
 import { AppSidebarNav } from './AppSidebarNav'
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   CContainer,
@@ -19,7 +19,7 @@ import {
   cilBell,
   cilContrast,
   cilEnvelopeOpen,
-  cilList,
+  
   cilMenu,
   cilMoon,
   cilSun,
@@ -57,9 +57,7 @@ const AppHeader = () => {
               Dashboard
             </CNavLink>
           </CNavItem>
-          <CNavItem>
-            <CNavLink as={Link} to="/users">Users</CNavLink>
-          </CNavItem>
+          
           <CNavItem>
             <CNavLink as={Link} to="/settings">Settings</CNavLink>
           </CNavItem>
@@ -70,11 +68,7 @@ const AppHeader = () => {
               <CIcon icon={cilBell} size="lg" />
             </CNavLink>
           </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink>
-          </CNavItem>
+          
           <CNavItem>
             <CNavLink href="#">
               <CIcon icon={cilEnvelopeOpen} size="lg" />
