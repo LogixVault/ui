@@ -1,6 +1,5 @@
 import React, { lazy } from 'react';
 
-const Users = lazy(() => import('./views/Users/Users'));
 
 const Login = lazy(() => import('./views/pages/login/Login'));
 const AllOrders = lazy(() => import('./views/orders/AllOrders'));
@@ -47,7 +46,6 @@ const routes = [
   { path: '/analytics/products', name: 'Products', element: Product },
 
   { path: '/login', name: 'Login', element: Login },
-{ path: '/users', name: 'Users', element: Users },
 
  
 
